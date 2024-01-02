@@ -5,8 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2f61724a-9ca1-48e0-9897-eb2fb953af6e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/votingapp/interface.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/votingapp/db/DatabaseConnection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/votingapp/DAOImplementation/OptionImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/votingapp/DAOImplementation/OptionImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/votingapp/DAOImplementation/PollImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/votingapp/DAOImplementation/PollImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/votingapp/DAOImplementation/UserImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/votingapp/DAOImplementation/UserImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,6 +23,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="FxmlFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -39,6 +46,10 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Downloaded.Files.Path.Enabled": "false",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
@@ -50,6 +61,9 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
     "settings.editor.selected.configurable": "discord-application",
     "vue.rearranger.settings.migration": "true"
   }
@@ -64,12 +78,48 @@
       <updated>1704039107082</updated>
       <workItem from="1704039109404" duration="2282000" />
       <workItem from="1704046971904" duration="2245000" />
-      <workItem from="1704112954536" duration="5214000" />
+      <workItem from="1704112954536" duration="10571000" />
     </task>
+    <task id="LOCAL-00001" summary="Updated project structure using DAO design pattern, DAO and model files done.">
+      <option name="closed" value="true" />
+      <created>1704146469566</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1704146469566</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Updated project structure using DAO design pattern, DAO and model files done." />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated project structure using DAO design pattern, DAO and model files done." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
