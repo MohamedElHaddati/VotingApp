@@ -51,8 +51,8 @@ The project follows the MVC (Model-View-Controller) design pattern.
 - Use the provided SQL scripts to create tables and insert initial data.
 
 ## Contributors
-- [EL HADDATI Mohamed](link-to-your-profile) - Creator
-- [Boutbib Ayoub](link-to-your-profile) - Creator
+- [EL HADDATI Mohamed](https://github.com/MohamedElHaddati) - Creator
+- [Boutbib Ayoub](https://github.com/BoutbibB) - Creator
 
 ## License
 This project is licensed under the [MIT License](LICENSE).
