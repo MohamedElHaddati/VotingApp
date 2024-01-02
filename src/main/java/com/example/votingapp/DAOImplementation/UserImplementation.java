@@ -16,7 +16,7 @@ public class UserImplementation implements UserDAO {
     public void addUser(User user) {
         Connection connection = DatabaseConnection.getConnection();
         if (connection != null) {
-            String query = "INSERT INTO User (full_name, username, email, password) VALUES (?, ?, ?, ?)";
+            String query = "INSERT INTO User (full_name, user_name, email, password) VALUES (?, ?, ?, ?)";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.setString(1, user.getFullName());
                 preparedStatement.setString(2, user.getUsername());
@@ -83,7 +83,7 @@ public class UserImplementation implements UserDAO {
     public User getUserByUsername(String username) {
         Connection connection = DatabaseConnection.getConnection();
         if (connection != null) {
-            String query = "SELECT * FROM User WHERE username = ?";
+            String query = "SELECT * FROM User WHERE user_name = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.setString(1, username);
 
@@ -124,17 +124,38 @@ public class UserImplementation implements UserDAO {
         return null;
 
     }
+    @Override
+    public boolean verifyLogin(String username, String password) {
+        Connection connection = DatabaseConnection.getConnection();
+        if (connection != null) {
+            String query = "SELECT * FROM User WHERE user_name = ? AND password = ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setString(1, username);
+                preparedStatement.setString(2, password);
+
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    return resultSet.next(); // Returns true if credentials are valid
+                }
+            } catch (SQLException e) {
+                e.printStackTrace(); // Handle exceptions appropriately
+            } finally {
+                DatabaseConnection.closeConnection(connection);
+            }
+        }
+        return false;
+    }
 
     @Override
     public void updateUser(User user) {
         Connection connection = DatabaseConnection.getConnection();
         if (connection != null) {
-            String query = "UPDATE User SET full_name = ?, email = ?, password = ? WHERE id = ?";
+            String query = "UPDATE User SET full_name = ?, user_name = ?, email = ?, password = ? WHERE id = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.setString(1, user.getFullName());
-                preparedStatement.setString(2, user.getEmail());
-                preparedStatement.setString(3, user.getPassword());
-                preparedStatement.setInt(4, user.getId());
+                preparedStatement.setString(2, user.getUsername());
+                preparedStatement.setString(3, user.getEmail());
+                preparedStatement.setString(4, user.getPassword());
+                preparedStatement.setInt(5, user.getId());
 
                 int rowsAffected = preparedStatement.executeUpdate();
                 if (rowsAffected == 0) {
@@ -171,7 +192,7 @@ public class UserImplementation implements UserDAO {
     private User extractUserFromResultSet(ResultSet resultSet) throws SQLException {
         int id = resultSet.getInt("id");
         String fullName = resultSet.getString("full_name");
-        String username = resultSet.getString("username");
+        String username = resultSet.getString("user_name");
         String email = resultSet.getString("email");
         String password = resultSet.getString("password");
 

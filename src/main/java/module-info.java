@@ -9,5 +9,7 @@ module com.example.votingapp {
             requires org.kordamp.bootstrapfx.core;
             
     opens com.example.votingapp to javafx.fxml;
+    opens com.example.votingapp.Controllers;
     exports com.example.votingapp;
+    exports com.example.votingapp.Controllers;
 }
