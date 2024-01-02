@@ -48,7 +48,65 @@ The project follows the MVC (Model-View-Controller) design pattern.
 
 ## Database Setup
 - Create a MySQL database named `votingapp`.
+- Edit the DatabaseConnection.java if your DB connection credentials are different that root and an empty password.
 - Use the provided SQL scripts to create tables and insert initial data.
+```sql
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `full_name` varchar(255) DEFAULT NULL,
+  `user_name` varchar(255) DEFAULT NULL,
+  `Email` varchar(255) DEFAULT NULL,
+  `Password` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user_name` (`user_name`),
+  UNIQUE KEY `Email` (`Email`),
+  CONSTRAINT `nn_full_name` CHECK (`full_name` is not null),
+  CONSTRAINT `nn_user_name` CHECK (`user_name` is not null),
+  CONSTRAINT `nn_Email` CHECK (`Email` is not null)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE `poll` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `date` datetime DEFAULT NULL,
+  `endDate` datetime DEFAULT NULL,
+  `visibility` int(11) DEFAULT NULL,
+  `privateCode` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `poll_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+  CONSTRAINT `nn_user_id` CHECK (`user_id` is not null)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
+
+CREATE TABLE `option` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Poll_id` int(11) NOT NULL,
+  `content` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `Poll_id` (`Poll_id`),
+  CONSTRAINT `option_ibfk_1` FOREIGN KEY (`Poll_id`) REFERENCES `poll` (`id`),
+  CONSTRAINT `nn_Poll_id` CHECK (`Poll_id` is not null)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE `vote` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `poll_id` int(11) NOT NULL,
+  `option_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  KEY `poll_id` (`poll_id`),
+  KEY `option_id` (`option_id`),
+  CONSTRAINT `vote_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+  CONSTRAINT `vote_ibfk_2` FOREIGN KEY (`poll_id`) REFERENCES `poll` (`id`),
+  CONSTRAINT `vote_ibfk_3` FOREIGN KEY (`option_id`) REFERENCES `option` (`id`),
+  CONSTRAINT `nn_vote_user_id` CHECK (`user_id` is not null),
+  CONSTRAINT `nn_vote_poll_id` CHECK (`poll_id` is not null),
+  CONSTRAINT `nn_vote_option_id` CHECK (`option_id` is not null)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+```
 
 ## Contributors
 - [EL HADDATI Mohamed](https://github.com/MohamedElHaddati) - Creator
