@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.collections.FXCollections?>
+<GridPane fx:controller="com.example.votingapp.Controllers.FormController" xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
+<padding>
+<Insets top="20" right="20" bottom="20" left="20"/>
+</padding>
+
+<Label text="Title:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+<TextField fx:id="titleField" promptText="Enter Title" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+<Label text="Description:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+<TextArea fx:id="descriptionArea" promptText="Enter Description" prefRowCount="4" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+<Label text="Visibility:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+<ComboBox fx:id="visibilityComboBox" GridPane.columnIndex="1" GridPane.rowIndex="2">
+<items>
+    <FXCollections fx:factory="observableArrayList">
+        <String fx:value="Public"/>
+        <String fx:value="Private"/>
+    </FXCollections>
+</items>
+</ComboBox>
+
+<Label text="Private Code:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+<TextField fx:id="privateCodeField" promptText="Enter Private Code" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+<Label text="Number of Choices:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+<ComboBox fx:id="choicesComboBox" GridPane.columnIndex="1" GridPane.rowIndex="4">
+<items>
+    <FXCollections fx:factory="observableArrayList">
+        <Integer fx:value="2"/>
+        <Integer fx:value="3"/>
+        <!-- ... Add values for 4 to 10 -->
+    </FXCollections>
+</items>
+</ComboBox>
+
+<Label fx:id="choicesLabel" text="Choices:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+
+<Button text="Create Poll" onAction="#onCreatePoll" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+        </GridPane>

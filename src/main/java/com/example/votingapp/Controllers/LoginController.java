@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -42,12 +43,23 @@ public class LoginController {
         this.userDAO = userDAO;
     }
 
+
+
+    // Method to set the success message
+    public void setSuccessMessage(String message) {
+        errorLabel.setTextFill(Color.GREEN);
+        errorLabel.setText(message);
+    }
+
+
+
     @FXML
     private void handleLogin(ActionEvent event) throws IOException {
         String user = username.getText();
         String pass = password.getText();
 
         if (user.isEmpty() || pass.isEmpty()) {
+            errorLabel.setTextFill(Color.RED);
             errorLabel.setText("Please enter username and password.");
             errorLabel.setVisible(true);
             return;
@@ -59,6 +71,7 @@ public class LoginController {
             showSuccessView(event);
         } else {
             // Invalid login
+            errorLabel.setTextFill(Color.RED);
             errorLabel.setText("Invalid username or password.");
             errorLabel.setVisible(true);
         }

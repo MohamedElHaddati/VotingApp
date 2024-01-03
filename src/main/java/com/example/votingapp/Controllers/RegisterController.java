@@ -12,10 +12,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+
+
 
 public class RegisterController {
 
@@ -41,6 +44,13 @@ public class RegisterController {
     private Label errorLabel;
 
     private UserImplementation userDAO;
+
+    private String successMessage;
+
+    // Method to set the success message
+    public void setSuccessMessage(String message) {
+        this.successMessage = message;
+    }
 
     public RegisterController() {
         userDAO = new UserImplementation(); // Initialize in the constructor
@@ -71,6 +81,7 @@ public class RegisterController {
 
                 try {
                     userDAO.addUser(newUser);
+                    setSuccessMessage("Registration successful!");
                     showSuccessView();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -130,7 +141,10 @@ public class RegisterController {
     private void showSuccessView() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/votingapp/login.fxml"));
         Parent root = loader.load();
-        Stage stage = (Stage) registerButton.getScene().getWindow(); // Assuming registerButton is a button in the same scene
+        LoginController loginController = loader.getController();
+        loginController.setSuccessMessage(successMessage); // Pass the success message to the login controller
+
+        Stage stage = (Stage) registerButton.getScene().getWindow(); // Adjust this line as per your setup
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

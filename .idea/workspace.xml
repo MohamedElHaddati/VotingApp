@@ -5,8 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2f61724a-9ca1-48e0-9897-eb2fb953af6e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/votingapp/Controllers/FormController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/votingapp/Controllers/MainController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/votingapp/form.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/votingapp/Controllers/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/votingapp/Controllers/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/votingapp/Controllers/RegisterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/votingapp/Controllers/RegisterController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/votingapp/success.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/votingapp/success.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/votingapp/Controllers/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/votingapp/Controllers/LoginController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/votingapp/Controllers/RegisterController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/votingapp/Controllers/RegisterController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/votingapp/success.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/votingapp/success.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +103,7 @@
       <updated>1704039107082</updated>
       <workItem from="1704039109404" duration="2282000" />
       <workItem from="1704046971904" duration="2245000" />
-      <workItem from="1704112954536" duration="33436000" />
+      <workItem from="1704112954536" duration="42114000" />
     </task>
     <task id="LOCAL-00001" summary="Updated project structure using DAO design pattern, DAO and model files done.">
       <option name="closed" value="true" />
