@@ -3,10 +3,8 @@ package com.example.votingapp.DAOImplementation;
 import com.example.votingapp.model.Option;
 import com.example.votingapp.db.DatabaseConnection;
 import com.example.votingapp.DAO.OptionDAO;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -118,6 +116,38 @@ public class OptionImplementation implements OptionDAO {
                 DatabaseConnection.closeConnection(connection);
             }
         }
+    }
+
+    @Override
+    public int addOptionAndGetId(Option option) {
+        Connection connection = DatabaseConnection.getConnection();
+        int generatedId = -1; // Initializing with an invalid ID
+        if (connection != null) {
+            String query = "INSERT INTO Option (Poll_id, content) VALUES (?, ?)";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+                preparedStatement.setInt(1, option.getPollId());
+                preparedStatement.setString(2, option.getContent());
+
+                int rowsAffected = preparedStatement.executeUpdate();
+                if (rowsAffected == 0) {
+                    throw new SQLException("Creating option failed, no rows affected.");
+                }
+
+                // Retrieve the generated ID after insertion
+                try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        generatedId = generatedKeys.getInt(1);
+                    } else {
+                        throw new SQLException("Creating option failed, no ID obtained.");
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace(); // Handle exceptions appropriately
+            } finally {
+                DatabaseConnection.closeConnection(connection);
+            }
+        }
+        return generatedId;
     }
 
     @Override

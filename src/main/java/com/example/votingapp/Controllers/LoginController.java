@@ -1,6 +1,7 @@
 package com.example.votingapp.Controllers;
 
 import com.example.votingapp.DAOImplementation.UserImplementation;
+import com.example.votingapp.model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -68,6 +69,9 @@ public class LoginController {
         if (userDAO != null && userDAO.verifyLogin(user, pass)) {
             // Successful login
             errorLabel.setVisible(false);
+            User loggedInUser = userDAO.getUserByUsername(user); // Retrieve the full user details
+            UserSession userSession = UserSession.getInstance();
+            userSession.setCurrentUser(loggedInUser);
             showSuccessView(event);
         } else {
             // Invalid login

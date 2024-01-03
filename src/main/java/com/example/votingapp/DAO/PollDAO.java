@@ -14,6 +14,8 @@ public interface PollDAO {
     // Update operation
     void updatePoll(Poll poll);
 
+    public int addPollAndGetId(Poll poll);
+
     // Delete operation
     void deletePoll(int id);
 

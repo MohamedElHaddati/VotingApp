@@ -1,52 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollBar?>
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="769.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.votingapp.Controllers.MainController">
-   <children>
-      <Separator layoutX="231.0" orientation="VERTICAL" prefHeight="520.0" prefWidth="0.0" />
-      <Button layoutX="26.0" layoutY="470.0" mnemonicParsing="false" onAction="#gotoForm" text="Create Poll" />
-      <Button layoutX="135.0" layoutY="470.0" mnemonicParsing="false" text="Private Poll" />
-      <Separator layoutY="87.0" prefHeight="3.0" prefWidth="232.0" />
-      <Separator layoutY="444.0" prefHeight="3.0" prefWidth="232.0" />
-      <ScrollBar layoutX="748.0" layoutY="51.0" orientation="VERTICAL" prefHeight="370.0" prefWidth="14.0" />
-      <Button layoutX="90.0" layoutY="396.0" mnemonicParsing="false" text="Logout" />
-      <Label layoutX="31.0" layoutY="121.0" text="Profile">
-         <font>
-            <Font name="System Bold" size="20.0" />
-         </font>
-      </Label>
-      <GridPane layoutX="16.0" layoutY="170.0" prefHeight="200.0" prefWidth="200.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <Label text="Full Name:" />
-            <Label text="Username:" GridPane.rowIndex="1" />
-            <Label text="Email:" GridPane.rowIndex="2" />
-            <Label text="Label" GridPane.columnIndex="1" />
-            <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-         </children>
-      </GridPane>
-      <Label layoutX="49.0" layoutY="25.0" text="VotingApp">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Label>
-   </children>
-</AnchorPane>
+<ScrollPane fitToHeight="true" fitToWidth="true" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.votingapp.Controllers.MainController">
+    <content>
+        <AnchorPane prefHeight="520.0" prefWidth="769.0">
+            <children>
+                <Separator layoutX="231.0" orientation="VERTICAL" prefHeight="520.0" prefWidth="0.0" />
+                <Button layoutX="26.0" layoutY="470.0" mnemonicParsing="false" onAction="#gotoForm" text="Create Poll" />
+                <Button layoutX="135.0" layoutY="470.0" mnemonicParsing="false" text="Private Poll" />
+                <Separator layoutY="87.0" prefHeight="3.0" prefWidth="232.0" />
+                <Separator layoutY="444.0" prefHeight="3.0" prefWidth="232.0" />
+                <Button layoutX="90.0" layoutY="396.0" mnemonicParsing="false" text="Logout" />
+                <Label layoutX="31.0" layoutY="121.0" text="Profile">
+                    <font>
+                        <Font name="System Bold" size="20.0" />
+                    </font>
+                </Label>
+                <GridPane layoutX="16.0" layoutY="170.0" prefHeight="200.0" prefWidth="200.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <Label text="Full Name:" />
+                        <Label text="Username:" GridPane.rowIndex="1" />
+                        <Label text="Email:" GridPane.rowIndex="2" />
+                        <Label fx:id="fullname" prefHeight="51.0" prefWidth="88.0" text="Label" GridPane.columnIndex="1" />
+                        <Label fx:id="username" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label fx:id="email" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                    </children>
+                </GridPane>
+                <Label layoutX="49.0" layoutY="25.0" text="VotingApp">
+                    <font>
+                        <Font name="System Bold" size="24.0" />
+                    </font>
+                </Label>
+                <VBox layoutX="235.0" layoutY="1.0" prefHeight="515.0" prefWidth="527.0" spacing="10">
+                    <!-- Placeholder labels for displaying public polls -->
+                    <Label style="-fx-font-weight: bold;" text="Public Polls" />
+                    <VBox fx:id="publicPollsContainer" />
+                </VBox>
+            </children>
+        </AnchorPane>
+    </content>
+</ScrollPane>

@@ -7,6 +7,8 @@ public interface OptionDAO {
     // Create operation
     void addOption(Option option);
 
+    public int addOptionAndGetId(Option option);
+
     // Read operation
     Option getOptionById(int id);
     List<Option> getAllOptionsByPollId(int pollId);

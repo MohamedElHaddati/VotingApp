@@ -3,10 +3,8 @@ package com.example.votingapp.DAOImplementation;
 import com.example.votingapp.model.Poll;
 import com.example.votingapp.db.DatabaseConnection;
 import com.example.votingapp.DAO.PollDAO;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
+import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +35,43 @@ public class PollImplementation implements PollDAO {
                 DatabaseConnection.closeConnection(connection);
             }
         }
+    }
+
+    @Override
+    public int addPollAndGetId(Poll poll) {
+        Connection connection = DatabaseConnection.getConnection();
+        int generatedId = -1; // Initializing with an invalid ID
+        if (connection != null) {
+            String query = "INSERT INTO Poll (user_id, title, description, date, endDate, visibility, privateCode) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+                preparedStatement.setInt(1, poll.getUserId());
+                preparedStatement.setString(2, poll.getTitle());
+                preparedStatement.setString(3, poll.getDescription());
+                preparedStatement.setObject(4, poll.getDate());
+                preparedStatement.setObject(5, poll.getEndDate());
+                preparedStatement.setInt(6, poll.getVisibility());
+                preparedStatement.setString(7, poll.getPrivateCode());
+
+                int rowsAffected = preparedStatement.executeUpdate();
+                if (rowsAffected == 0) {
+                    throw new SQLException("Creating poll failed, no rows affected.");
+                }
+
+                // Retrieve the generated ID after insertion
+                try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        generatedId = generatedKeys.getInt(1);
+                    } else {
+                        throw new SQLException("Creating poll failed, no ID obtained.");
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace(); // Handle exceptions appropriately
+            } finally {
+                DatabaseConnection.closeConnection(connection);
+            }
+        }
+        return generatedId;
     }
 
     @Override
