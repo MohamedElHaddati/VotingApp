@@ -12,7 +12,7 @@ This project is a Java-based voting application created using JavaFX for the use
 - Password encryption for user security
 
 ## Technologies Used
-- Java 8+
+- Java 21
 - JavaFX for UI
 - JDBC for database connectivity
 - Scene Builder for UI design
@@ -26,14 +26,14 @@ The project follows the MVC (Model-View-Controller) design pattern.
     - `DAO`: Contains Data Access Object interfaces.
     - `model`: Contains Java model classes.
     - `DAOImplementations`: Contains DAO Implementations.
-    - `view`: Contains JavaFX FXML files for the UI.
+    - `Controllers`: Contains Login & Register controllers.
 - `src/main/resources`: Contains resource files (e.g., FXML files).
 
 ### Classes
 - `com.example.votingapp.DAO`: Contains interfaces for DAOs (Data Access Objects).
 - `com.example.votingapp.DAOImplementation`: Contains implementations for DAO interfaces.
 - `com.example.votingapp.model`: Contains model classes representing entities.
-- `com.example.votingapp.view`: Contains FXML files for the UI views.
+- `com.example.votingapp.controller`: Contains class files crucial for database conncetion.
 
 ## Installation
 1. Clone the repository: `git clone https://github.com/MohamedElHaddati/VotingApp.git`
