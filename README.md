@@ -5,11 +5,12 @@ This project is a Java-based voting application created using JavaFX for the use
 
 ## Features
 - User authentication and registration
-- Create, edit, and delete polls
-- Vote in polls
-- View poll results
-- Anonymous voting option
-- Password encryption for user security
+- Create polls
+- Vote on a choice
+- Create private polls with custom private code
+- View poll results as a pie chart
+- Logout feature
+- View user details
 
 ## Technologies Used
 - Java 21
@@ -19,7 +20,7 @@ This project is a Java-based voting application created using JavaFX for the use
 - Maven for dependency management
 
 ## Project Structure
-The project follows the MVC (Model-View-Controller) design pattern.
+The project follows the DAO design pattern.
 
 ### Directories
 - `src/main/java/com/example/votingapp/`
