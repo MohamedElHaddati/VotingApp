@@ -9,6 +9,8 @@ public interface VoteDAO {
 
     // Read operation
     Vote getVoteById(int id);
+
+    boolean hasUserVoted(int userId, int pollId);
     List<Vote> getAllVotesByUserId(int userId);
 
     // Update operation

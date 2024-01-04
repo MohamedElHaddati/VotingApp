@@ -189,6 +189,28 @@ public class UserImplementation implements UserDAO {
         }
     }
 
+    static public String getUsernameForUserId(int userId) {
+        Connection connection = DatabaseConnection.getConnection();
+        String username = "";
+        if (connection != null) {
+            String query = "SELECT user_name FROM User WHERE id = ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setInt(1, userId);
+
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    if (resultSet.next()) {
+                        username = resultSet.getString("user_name");
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace(); // Handle exceptions appropriately
+            } finally {
+                DatabaseConnection.closeConnection(connection);
+            }
+        }
+        return username;
+    }
+
     private User extractUserFromResultSet(ResultSet resultSet) throws SQLException {
         int id = resultSet.getInt("id");
         String fullName = resultSet.getString("full_name");

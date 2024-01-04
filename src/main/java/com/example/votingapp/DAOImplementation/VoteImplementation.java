@@ -148,6 +148,32 @@ public class VoteImplementation implements VoteDAO {
     }
 
     @Override
+    public boolean hasUserVoted(int userId, int pollId) {
+        Connection connection = DatabaseConnection.getConnection();
+        boolean hasVoted = false;
+
+        if (connection != null) {
+            String query = "SELECT COUNT(*) AS count FROM Vote WHERE user_id = ? AND poll_id = ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setInt(1, userId);
+                preparedStatement.setInt(2, pollId);
+
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    if (resultSet.next()) {
+                        int count = resultSet.getInt("count");
+                        hasVoted = (count > 0);
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace(); // Handle exceptions appropriately
+            } finally {
+                DatabaseConnection.closeConnection(connection);
+            }
+        }
+        return hasVoted;
+    }
+
+    @Override
     public List<Vote> getAllVotesForOption(int optionId) {
         List<Vote> votes = new ArrayList<>();
         Connection connection = DatabaseConnection.getConnection();

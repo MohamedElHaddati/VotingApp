@@ -5,6 +5,7 @@ import java.util.List;
 
 public interface UserDAO {
     void addUser(User user);
+
     User findUser(int id);
     List<User> getAllUsers();
     public boolean verifyLogin(String username, String password);

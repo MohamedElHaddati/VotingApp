@@ -22,4 +22,8 @@ public interface PollDAO {
     // Other methods based on application needs
     // Example: Get all public polls
     List<Poll> getAllPublicPolls();
+
+    public String getUsernameForUserId(int userId);
+
+    public int getUserIdFromCurrentPoll(Poll poll);
 }

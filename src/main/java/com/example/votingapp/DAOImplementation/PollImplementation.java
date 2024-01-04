@@ -203,4 +203,72 @@ public class PollImplementation implements PollDAO {
         poll.setId(id);
         return poll;
     }
+
+    @Override
+    public int getUserIdFromCurrentPoll(Poll poll) {
+        Connection connection = DatabaseConnection.getConnection();
+        int userId = -1;
+        if (connection != null) {
+            String query = "SELECT user_id FROM Poll WHERE id = ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setInt(1, poll.getId());
+
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    if (resultSet.next()) {
+                        userId = resultSet.getInt("user_id");
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace(); // Handle exceptions appropriately
+            } finally {
+                DatabaseConnection.closeConnection(connection);
+            }
+        }
+        return userId;
+    }
+
+    public int getUserIdFromPollId(int pollId) {
+        Connection connection = DatabaseConnection.getConnection();
+        int userId = -1;
+        if (connection != null) {
+            String query = "SELECT user_id FROM Poll WHERE id = ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setInt(1, pollId);
+
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    if (resultSet.next()) {
+                        userId = resultSet.getInt("user_id");
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace(); // Handle exceptions appropriately
+            } finally {
+                DatabaseConnection.closeConnection(connection);
+            }
+        }
+        return userId;
+    }
+
+
+    public String getUsernameForUserId(int userId) {
+        Connection connection = DatabaseConnection.getConnection();
+        String username = "";
+        if (connection != null) {
+            String query = "SELECT user_name FROM User WHERE id = ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setInt(1, userId);
+
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    if (resultSet.next()) {
+                        username = resultSet.getString("user_name");
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace(); // Handle exceptions appropriately
+            } finally {
+                DatabaseConnection.closeConnection(connection);
+            }
+        }
+        return username;
+    }
 }
