@@ -65,15 +65,22 @@ public class MainController {
         Button voteButton = new Button("Vote");
         Button resultsButton = new Button("Results");
 
+        VoteImplementation voteImplementation = new VoteImplementation();
+        List<Vote> votesForPoll = voteImplementation.getAllVotesForPoll(poll.getId());
+        int totalVotes = votesForPoll.size(); // Count the total number of votes
+
+
         if (LocalDateTime.now().isBefore(poll.getEndDate())) {
-            // If current date is before end date, display both "Vote" and "Results" buttons
+            // If current date is before end date, display "Vote" button
             voteButton.setOnAction(event -> handleVoteButton(poll.getId()));
+            buttonContainer.getChildren().add(voteButton);
+        }
+
+        if (totalVotes > 0) {
+            // Show the "Results" button only if there are votes for the poll
+            Label totalVotesLabel = new Label("Total Votes: " + totalVotes);
             resultsButton.setOnAction(event -> handleResultsButton(poll.getId()));
-            buttonContainer.getChildren().addAll(voteButton, resultsButton);
-        } else {
-            // If current date is after end date, display only "Results" button
-            resultsButton.setOnAction(event -> handleResultsButton(poll.getId()));
-            buttonContainer.getChildren().add(resultsButton);
+            buttonContainer.getChildren().addAll(totalVotesLabel, resultsButton);
         }
 
         Separator separator = new Separator(); // Add a line separator between polls
@@ -82,6 +89,7 @@ public class MainController {
 
         return entry;
     }
+
 
 
 
@@ -116,6 +124,103 @@ public class MainController {
     }
 
     private final PollImplementation pollImplementation = new PollImplementation();
+
+    @FXML
+    private TextField privateCodeField;
+
+    @FXML
+    private void handlePrivatePollButtonClick(ActionEvent event) {
+        Stage privatePollStage = new Stage();
+        privatePollStage.setTitle("Enter Private Code");
+
+        VBox vbox = new VBox(10);
+        vbox.setPadding(new Insets(10));
+
+        Label label = new Label("Enter the private code:");
+        TextField codeInputField = new TextField();
+        Button checkButton = new Button("Check");
+
+        checkButton.setOnAction(checkEvent -> {
+            String privateCode = codeInputField.getText();
+
+            if (privateCode.isEmpty()) {
+                displayErrorMessage("Please enter the private code.");
+            } else {
+                PollImplementation pollImplementation = new PollImplementation();
+                Poll privatePoll = pollImplementation.getPollByPrivateCode(privateCode);
+
+                if (privatePoll == null) {
+                    displayErrorMessage("The poll with the given private code does not exist.");
+                } else {
+                    // Close the input window and display the poll details
+                    privatePollStage.close();
+                    displayPollDetails(privatePoll);
+                }
+            }
+        });
+
+        vbox.getChildren().addAll(label, codeInputField, checkButton);
+        Scene scene = new Scene(vbox, 300, 150);
+        privatePollStage.setScene(scene);
+        privatePollStage.show();
+    }
+
+
+    private void displayPollDetails(Poll poll) {
+        VBox pollEntry = new VBox(10);
+
+        Label pollTitle = new Label(poll.getTitle());
+        Label createdBy = new Label("Created by: " + UserImplementation.getUsernameForUserId(poll.getUserId()));
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formattedCreationDate = poll.getDate().format(formatter);
+        String formattedEndDate = poll.getEndDate().format(formatter);
+
+        Label creationDateLabel = new Label("Created: " + formattedCreationDate);
+        Label endDateLabel = new Label("End Date: " + formattedEndDate);
+
+        HBox buttonContainer = new HBox(10);
+        Button voteButton = new Button("Vote");
+        Button resultsButton = new Button("Results");
+
+        VoteImplementation voteImplementation = new VoteImplementation();
+        List<Vote> votesForPoll = voteImplementation.getAllVotesForPoll(poll.getId());
+        int totalVotes = votesForPoll.size();
+
+        Label totalVotesLabel = new Label("Total Votes: " + totalVotes);
+
+        if (LocalDateTime.now().isBefore(poll.getEndDate())) {
+            voteButton.setOnAction(event -> handleVoteButton(poll.getId()));
+            buttonContainer.getChildren().add(voteButton);
+        }
+
+        if (totalVotes > 0) {
+            resultsButton.setOnAction(event -> handleResultsButton(poll.getId()));
+            buttonContainer.getChildren().addAll(totalVotesLabel, resultsButton);
+        }
+
+        Separator separator = new Separator();
+        pollEntry.getChildren().addAll(pollTitle, createdBy, creationDateLabel, endDateLabel, buttonContainer, separator);
+
+        Stage pollDetailsStage = new Stage();
+        pollDetailsStage.setTitle("Private Poll Details");
+
+        Scene scene = new Scene(pollEntry, 400, 300);
+        pollDetailsStage.setScene(scene);
+        pollDetailsStage.show();
+    }
+
+
+    // Helper methods for displaying messages or handling UI
+    private void displayErrorMessage(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+
 
 
 
@@ -226,13 +331,6 @@ public class MainController {
         alert.showAndWait();
     }
 
-    private void displayErrorMessage(String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
 
 
 

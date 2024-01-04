@@ -249,6 +249,28 @@ public class PollImplementation implements PollDAO {
         return userId;
     }
 
+    @Override
+    public Poll getPollByPrivateCode(String privateCode) {
+        Connection connection = DatabaseConnection.getConnection();
+        if (connection != null) {
+            String query = "SELECT * FROM Poll WHERE privateCode = ? AND visibility = 0"; // Assuming visibility 0 represents private polls
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setString(1, privateCode);
+
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    if (resultSet.next()) {
+                        return extractPollFromResultSet(resultSet);
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace(); // Handle exceptions appropriately
+            } finally {
+                DatabaseConnection.closeConnection(connection);
+            }
+        }
+        return null;
+    }
+
 
     public String getUsernameForUserId(int userId) {
         Connection connection = DatabaseConnection.getConnection();
