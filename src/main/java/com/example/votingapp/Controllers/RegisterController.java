@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -129,6 +130,28 @@ public class RegisterController {
 
     private Stage stage;
     private Scene scene;
+
+    @FXML
+    private Pane pane;
+
+    private void setBackground() {
+        String relativePath = "/com/example/votingapp/Images/stuffFlipped.png";
+        String imagePath = getClass().getResource(relativePath).toExternalForm();
+        String imageStyle = "-fx-background-image: url('" + imagePath + "'); " +
+                "-fx-background-size: contain; " +
+                "-fx-background-position: center; " +
+                "-fx-background-repeat: no-repeat; ";
+
+        pane.setStyle(imageStyle);
+
+
+    }
+
+    @FXML
+    private void initialize() {
+        // Method to set the background image
+        setBackground();
+    }
     @FXML
     private void loadLoginView(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/votingapp/login.fxml"));

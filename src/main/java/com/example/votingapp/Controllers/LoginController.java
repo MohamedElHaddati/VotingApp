@@ -12,6 +12,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -35,6 +40,27 @@ public class LoginController {
     private Label errorLabel;
 
     private UserImplementation userDAO;
+
+    @FXML
+    private void initialize() {
+        // Method to set the background image
+        setBackground();
+    }
+
+    @FXML
+    private Pane pane;
+
+    private void setBackground() {
+        String relativePath = "/com/example/votingapp/Images/stuff.png";
+        String imagePath = getClass().getResource(relativePath).toExternalForm();
+        String imageStyle = "-fx-background-image: url('" + imagePath + "'); " +
+                "-fx-background-size: contain; " + // Ensures the entire image fits within the container
+                "-fx-background-position: center; " +
+                "-fx-background-repeat: no-repeat;";
+
+        pane.setStyle(imageStyle);
+
+    }
 
     public LoginController() {
         userDAO = new UserImplementation(); // Initialize in the constructor

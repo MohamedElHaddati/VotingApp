@@ -1,52 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 
-<StackPane prefHeight="248.0" prefWidth="388.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.votingapp.Controllers.LoginController">
-    <children>
-      <StackPane prefHeight="230.0" prefWidth="309.0">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="460.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.votingapp.Controllers.LoginController">
+   <left>
+      <AnchorPane fx:id="pane" prefWidth="350.0" style="-fx-background-color: #142f40;" BorderPane.alignment="CENTER" />
+   </left>
+   <center>
+      <AnchorPane BorderPane.alignment="CENTER">
          <children>
-            <VBox prefHeight="175.0" prefWidth="368.0" spacing="10.0">
-               <children>
-                  <GridPane prefWidth="582.0">
-                     <children>
-                        <HBox prefHeight="60.0" prefWidth="144.0" />
-                        <Label text="Username:" GridPane.rowIndex="1" />
-                        <Label text="Password:" GridPane.rowIndex="2" />
-                        <TextField fx:id="username" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <PasswordField fx:id="password" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Label prefHeight="30.0" prefWidth="54.0" text="Login">
-                           <font>
-                              <Font name="System Bold" size="20.0" />
-                           </font>
-                        </Label>
-                     </children>
-                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="148.0" minWidth="10.0" prefWidth="109.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="228.0" minWidth="10.0" prefWidth="189.0" />
-                     </columnConstraints>
-                     <rowConstraints>
-                        <RowConstraints />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                     </rowConstraints>
-                  </GridPane>
-                  <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="264.0">
-                     <children>
-                        <Label fx:id="errorLabel" prefHeight="18.0" prefWidth="274.0" textFill="#ea1616" visible="false" />
-                        <Button fx:id="loginButton" onAction="#handleLogin" alignment="CENTER" defaultButton="true" mnemonicParsing="false" prefHeight="26.0" prefWidth="84.0" text="Login" />
-                     </children>
-                  </HBox>
-                  <Button fx:id="gotoSignup" onAction="#gotoSignup" alignment="CENTER" mnemonicParsing="false" prefHeight="37.0" underline="true" prefWidth="368.0" text="Don't have an account? Register" />
-               </children>
-            </VBox>
+            <TextField fx:id="username" layoutX="87.0" layoutY="177.0" prefHeight="39.0" prefWidth="176.0" promptText="User name" style="-fx-background-color: transparent; -fx-border-color: #1f7490; -fx-border-width: 0px.0px.6px.0px;" />
+            <PasswordField fx:id="password" layoutX="87.0" layoutY="240.0" prefHeight="39.0" prefWidth="176.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #1f7490; -fx-border-width: 0px.0px.6px.0px;" />
+            <Button fx:id="loginButton" defaultButton="true" layoutX="126.0" layoutY="324.0" mnemonicParsing="false" onAction="#handleLogin" prefHeight="36.0" prefWidth="98.0" style="-fx-background-color: #2c788d; -fx-background-radius: 70;" text="Login" textFill="#44b9d7" />
+            <Button fx:id="gotoSignup" layoutX="55.0" layoutY="61.0" mnemonicParsing="false" onAction="#gotoSignup" prefHeight="32.0" prefWidth="240.0" style="-fx-background-color: #2c788d; -fx-background-radius: 70;" text="Don't have an account? Register now" textFill="#2eb2d7" />
+            <Label fx:id="errorLabel" layoutX="99.0" layoutY="399.0" prefHeight="24.0" prefWidth="221.0" style="-fx-background-color: transparent;" />
+            <Separator layoutX="11.0" layoutY="12.0" orientation="VERTICAL" prefHeight="435.0" prefWidth="5.0" />
          </children>
-      </StackPane>
-    </children>
-    <padding>
-        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-    </padding>
-</StackPane>
+      </AnchorPane>
+   </center>
+</BorderPane>

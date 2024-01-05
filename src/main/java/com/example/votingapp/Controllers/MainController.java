@@ -20,8 +20,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import com.example.votingapp.DAOImplementation.UserImplementation; // Import your UserImplementation class
@@ -91,7 +94,8 @@ public class MainController {
     }
 
 
-
+    @FXML
+    private Button btn;
 
 
 
@@ -101,10 +105,33 @@ public class MainController {
         UserSession userSession = UserSession.getInstance();
         User currentUser = userSession.getCurrentUser();
 
+
         fullname.setText(currentUser.getFullName());
         username.setText(currentUser.getUsername());
         email.setText(currentUser.getEmail());
 
+
+        // Fetch public polls from the database
+        PollImplementation pollImplementation = new PollImplementation();
+        List<Poll> publicPolls = pollImplementation.getAllPublicPolls();
+
+        if (publicPolls.isEmpty()) {
+            // If there are no public polls, show a message
+            Label noPollsLabel = new Label("No public polls available");
+            publicPollsContainer.getChildren().add(noPollsLabel);
+        } else {
+            // If there are public polls, display each poll with buttons
+            for (Poll poll : publicPolls) {
+                VBox pollEntry = createPollEntry(poll); // Create a method to generate UI elements for each poll
+                publicPollsContainer.getChildren().add(pollEntry);
+            }
+        }
+    }
+
+    @FXML
+    private void handleRefreshButton() {
+        // Clear existing content before fetching new polls
+        publicPollsContainer.getChildren().clear();
 
         // Fetch public polls from the database
         PollImplementation pollImplementation = new PollImplementation();
@@ -285,6 +312,7 @@ public class MainController {
             }
 
             Button voteButton = new Button("Vote");
+            voteButton.setDefaultButton(true);
             voteButton.setOnAction(event -> {
                 RadioButton selectedRadioButton = (RadioButton) choicesGroup.getSelectedToggle();
 
@@ -322,6 +350,23 @@ public class MainController {
             voteStage.show();
         }
     }
+
+    @FXML
+    private Pane pane;
+
+    private void setBackground() {
+        String relativePath = "/com/example/votingapp/Images/stuff.png";
+        String imagePath = getClass().getResource(relativePath).toExternalForm();
+        String imageStyle = "-fx-background-image: url('" + imagePath + "'); " +
+                "-fx-background-size: contain; " + // Ensures the entire image fits within the container
+                "-fx-background-position: center; " +
+                "-fx-background-repeat: no-repeat;";
+
+        pane.setStyle(imageStyle);
+
+    }
+
+
 
     private void displayVoteSuccessMessage() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
