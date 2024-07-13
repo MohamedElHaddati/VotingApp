@@ -111,7 +111,6 @@ CREATE TABLE `vote` (
 
 ## Contributors
 - [EL HADDATI Mohamed](https://github.com/MohamedElHaddati) - Creator
-- [Boutbib Ayoub](https://github.com/BoutbibB) - Creator
 
 ## License
 This project is licensed under the [GPL-3.0 license](COPYING).
